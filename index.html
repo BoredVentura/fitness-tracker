@@ -263,6 +263,41 @@
 
   </div>
   </div>
+
+<div class="modal" id="progressModal">
+  <div class="modal-card">
+
+    <button class="modal-close" id="closeProgressModal">×</button>
+
+    <p class="panel-label">UPDATE GOAL</p>
+    <h2>Update progress</h2>
+
+    <form id="progressForm">
+
+      <input
+        type="hidden"
+        id="progressGoalId"
+      >
+
+      <label>
+        Current progress
+        <input
+          type="number"
+          id="progressValue"
+          min="0"
+          required
+        >
+      </label>
+
+      <button type="submit" class="primary-button">
+        Save progress
+      </button>
+
+    </form>
+
+  </div>
+</div>
+  
 <script src="js/app.js"></script>
 </body>
 </html>
