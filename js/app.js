@@ -357,14 +357,7 @@ const progressValue = document.getElementById("progressValue");
 
         </div>
 
-        <div class="goal-actions">
-
-  <button
-    class="update-goal"
-    data-id="${goal.id}"
-  >
-    Update
-  </button>
+        
 
 <div class="goal-actions">
 
