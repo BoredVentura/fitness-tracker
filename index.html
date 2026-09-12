@@ -297,6 +297,56 @@
 
   </div>
 </div>
+
+  <div class="modal" id="settingsModal">
+  <div class="modal-card">
+
+    <button class="modal-close" id="closeSettingsModal">×</button>
+
+    <p class="panel-label">CUSTOMISE</p>
+    <h2>Tracker settings</h2>
+
+    <form id="settingsForm">
+
+      <label>
+        Weekly workout target
+        <input
+          type="number"
+          id="weeklyTarget"
+          min="1"
+          max="14"
+          value="4"
+          required
+        >
+      </label>
+
+      <label>
+        Accent colour
+        <input
+          type="color"
+          id="accentColor"
+          value="#536f5e"
+        >
+      </label>
+
+      <label>
+        Background colour
+        <input
+          type="color"
+          id="backgroundColor"
+          value="#f6f5f1"
+        >
+      </label>
+
+      <button type="submit" class="primary-button">
+        Save settings
+      </button>
+
+    </form>
+
+  </div>
+  </div>
+  
 <script src="js/app.js?v=3"></script>
 </body>
 </html>
