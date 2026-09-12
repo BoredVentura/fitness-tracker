@@ -313,7 +313,13 @@ const longestWorkout = document.getElementById("longestWorkout");
 
 
     goalList.innerHTML = goals.map(function (goal) {
+const target = Number(goal.target) || 0;
+const progress = Number(goal.progress) || 0;
 
+const percentage =
+  target > 0
+    ? Math.min(100, Math.round((progress / target) * 100))
+    : 0;
       return `
         <div class="goal-item">
 
@@ -326,6 +332,20 @@ const longestWorkout = document.getElementById("longestWorkout");
               ${goal.target}
               ${goal.unit}
             </p>
+
+<div class="goal-progress">
+  <div class="goal-progress-info">
+    <span>${progress} / ${target} ${goal.unit}</span>
+    <span>${percentage}%</span>
+  </div>
+
+  <div class="goal-progress-bar">
+    <div
+      class="goal-progress-fill"
+      style="width: ${percentage}%"
+    ></div>
+  </div>
+</div>
 
             <p>
               Due:
@@ -507,10 +527,13 @@ const longestWorkout = document.getElementById("longestWorkout");
           document.getElementById("goalDate").value,
 
         target:
-          document.getElementById("goalTarget").value,
+  document.getElementById("goalTarget").value,
 
-        unit:
-          document.getElementById("goalUnit").value
+progress:
+  document.getElementById("goalProgress").value,
+
+unit:
+  document.getElementById("goalUnit").value
 
       };
 
