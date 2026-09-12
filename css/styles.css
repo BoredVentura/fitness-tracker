@@ -20,7 +20,74 @@ body {
   max-width: 760px;
   margin: 0 auto 50px;
 }
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(20, 24, 21, 0.45);
+  z-index: 1000;
+}
 
+.modal.is-open {
+  display: flex;
+}
+
+.modal-card {
+  position: relative;
+  width: min(100%, 520px);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--card);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 24px 70px rgba(0,0,0,0.18);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.modal-card h2 {
+  margin: 0 0 24px;
+  font-size: 30px;
+}
+
+.modal-card form {
+  display: grid;
+  gap: 18px;
+}
+
+.modal-card label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.modal-card input,
+.modal-card textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font: inherit;
+  color: var(--text);
+  background: #ffffff;
+}
+
+.modal-card textarea {
+  resize: vertical;
+}
 .eyebrow {
   margin: 0 0 14px;
   font-size: 13px;
