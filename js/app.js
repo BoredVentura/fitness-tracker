@@ -92,11 +92,17 @@ function saveSettings() {
   );
 }
 
-  function applySettings() {
+function applySettings() {
   document.documentElement.style.setProperty(
     "--accent",
     trackerSettings.accentColor
   );
+
+  document.documentElement.style.setProperty(
+    "--bg",
+    trackerSettings.backgroundColor
+  );
+}
 
 function exportData() {
 
@@ -110,11 +116,10 @@ function exportData() {
   const fileContents =
     JSON.stringify(backup, null, 2);
 
-  const blob =
-    new Blob(
-      [fileContents],
-      { type: "application/json;charset=utf-8" }
-    );
+  const blob = new Blob(
+    [fileContents],
+    { type: "application/json;charset=utf-8" }
+  );
 
   const url =
     window.URL.createObjectURL(blob);
@@ -123,44 +128,19 @@ function exportData() {
     document.createElement("a");
 
   link.href = url;
-
-  link.download =
-    "fitness-tracker-backup.json";
-
+  link.download = "fitness-tracker-backup.json";
   link.style.display = "none";
 
   document.body.appendChild(link);
-
   link.click();
 
   setTimeout(function () {
-
     document.body.removeChild(link);
-
     window.URL.revokeObjectURL(url);
-
   }, 1000);
 }
-  const blob = new Blob(
-    [JSON.stringify(backup, null, 2)],
-    { type: "application/json" }
-  );
 
-  const url = URL.createObjectURL(blob);
-
-  const link = document.createElement("a");
-
-  link.href = url;
-  link.download = "fitness-tracker-backup.json";
-
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
-  URL.revokeObjectURL(url);
-}
-
-    function importData(file) {
+function importData(file) {
 
   const reader = new FileReader();
 
@@ -205,13 +185,7 @@ function exportData() {
   };
 
   reader.readAsText(file);
-    }
-    
-  document.documentElement.style.setProperty(
-    "--bg",
-    trackerSettings.backgroundColor
-  );
-  }
+}
   // ==============================
   // HELPERS
   // ==============================
