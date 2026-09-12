@@ -146,3 +146,37 @@ body {
     grid-template-columns: 1fr;
   }
 }
+.workout-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.workout-item:last-child {
+  border-bottom: 0;
+}
+
+.workout-item h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.workout-item p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.delete-workout {
+  align-self: flex-start;
+  border: 0;
+  background: transparent;
+  color: #9a4e4e;
+  font-weight: 700;
+}
+
+.delete-workout:hover {
+  text-decoration: underline;
+}
