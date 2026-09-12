@@ -594,6 +594,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
       });
 
+    document
+  .querySelectorAll(".update-goal")
+  .forEach(function (button) {
+
+    button.addEventListener("click", function () {
+
+      const id = Number(this.dataset.id);
+
+      const goal = goals.find(function (goal) {
+        return goal.id === id;
+      });
+
+      if (!goal) return;
+
+      progressGoalId.value = goal.id;
+      progressValue.value = goal.progress || 0;
+
+      progressModal.classList.add("is-open");
+
+    });
+
+  });
 
     updateSummary();
   }
