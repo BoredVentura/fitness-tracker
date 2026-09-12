@@ -7,7 +7,33 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>Fitness Tracker</h1>
-<script src="js/app.js"></script>
+<main class="app-shell">
+  <section class="hero">
+    <p class="eyebrow">FITNESS TRACKER</p>
+    <h1>Build strength. Track progress.</h1>
+    <p class="hero-text">
+      Plan workouts, monitor goals and keep your fitness journey organised.
+    </p>
+  </section>
+
+  <section class="dashboard-grid">
+    <article class="dashboard-card">
+      <h2>Today's Workout</h2>
+      <p>No workout planned yet.</p>
+    </article>
+
+    <article class="dashboard-card">
+      <h2>Weekly Progress</h2>
+      <p>0 of 4 workouts completed.</p>
+    </article>
+
+    <article class="dashboard-card">
+      <h2>Current Goal</h2>
+      <p>Add your first fitness goal.</p>
+    </article>
+  </section>
+</main>
+
+<script src="js/app.js"></script>  
 </body>
 </html>
