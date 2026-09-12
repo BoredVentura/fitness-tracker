@@ -11,6 +11,8 @@ const settingsForm = document.getElementById("settingsForm");
 const weeklyTargetInput = document.getElementById("weeklyTarget");
 const accentColorInput = document.getElementById("accentColor");
 const backgroundColorInput = document.getElementById("backgroundColor");
+  const exportDataButton = document.getElementById("exportDataButton");
+const importDataInput = document.getElementById("importDataInput");
   const addWorkoutButton = document.getElementById("addWorkoutButton");
   const workoutModal = document.getElementById("workoutModal");
   const closeWorkoutModal = document.getElementById("closeWorkoutModal");
@@ -96,6 +98,80 @@ function saveSettings() {
     trackerSettings.accentColor
   );
 
+function exportData() {
+  const backup = {
+    workouts: workouts,
+    goals: goals,
+    settings: trackerSettings,
+    exportedAt: new Date().toISOString()
+  };
+
+  const blob = new Blob(
+    [JSON.stringify(backup, null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "fitness-tracker-backup.json";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+    function importData(file) {
+
+  const reader = new FileReader();
+
+  reader.onload = function (event) {
+
+    try {
+
+      const backup =
+        JSON.parse(event.target.result);
+
+      workouts =
+        Array.isArray(backup.workouts)
+          ? backup.workouts
+          : [];
+
+      goals =
+        Array.isArray(backup.goals)
+          ? backup.goals
+          : [];
+
+      trackerSettings =
+        backup.settings || trackerSettings;
+
+      saveWorkouts();
+      saveGoals();
+      saveSettings();
+
+      applySettings();
+      renderWorkouts();
+      renderGoals();
+      updateSummary();
+      updateProgressStats();
+
+      alert("Backup imported successfully.");
+
+    } catch (error) {
+
+      alert("That backup file could not be imported.");
+
+    }
+
+  };
+
+  reader.readAsText(file);
+    }
+    
   document.documentElement.style.setProperty(
     "--bg",
     trackerSettings.backgroundColor
@@ -703,6 +779,25 @@ if (settingsModal) {
     updateSummary();
 
     settingsModal.classList.remove("is-open");
+
+  });
+  }
+
+  if (exportDataButton) {
+  exportDataButton.addEventListener("click", function () {
+    exportData();
+  });
+  }
+  if (importDataInput) {
+  importDataInput.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) return;
+
+    importData(file);
+
+    this.value = "";
 
   });
   }
