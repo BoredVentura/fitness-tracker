@@ -1,1 +1,5 @@
-console.log("Fitness Tracker loaded");
+const settingsButton = document.getElementById("settingsButton");
+
+settingsButton.addEventListener("click", function () {
+  alert("Settings panel is working.");
+});
