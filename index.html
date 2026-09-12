@@ -93,6 +93,63 @@
 
 </div>
 
+  <div class="modal" id="workoutModal">
+  <div class="modal-card">
+
+    <button class="modal-close" id="closeWorkoutModal">×</button>
+
+    <p class="panel-label">NEW WORKOUT</p>
+    <h2>Add a workout</h2>
+
+    <form id="workoutForm">
+
+      <label>
+        Workout name
+        <input
+          type="text"
+          id="workoutName"
+          placeholder="e.g. Upper Body"
+          required
+        >
+      </label>
+
+      <label>
+        Date
+        <input
+          type="date"
+          id="workoutDate"
+          required
+        >
+      </label>
+
+      <label>
+        Duration
+        <input
+          type="number"
+          id="workoutDuration"
+          placeholder="Minutes"
+          min="1"
+          required
+        >
+      </label>
+
+      <label>
+        Notes
+        <textarea
+          id="workoutNotes"
+          placeholder="Exercises, targets or notes..."
+          rows="4"
+        ></textarea>
+      </label>
+
+      <button type="submit" class="primary-button">
+        Save workout
+      </button>
+
+    </form>
+
+  </div>
+  </div>
 <script src="js/app.js"></script>
 </body>
 </html>
