@@ -366,12 +366,23 @@ const progressValue = document.getElementById("progressValue");
     Update
   </button>
 
+<div class="goal-actions">
+
+  <button
+    class="update-goal"
+    data-id="${goal.id}"
+  >
+    Update
+  </button>
+
   <button
     class="delete-goal"
     data-id="${goal.id}"
   >
     Delete
   </button>
+
+</div>
 
 </div>
 
