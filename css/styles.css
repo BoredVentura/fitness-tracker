@@ -345,7 +345,33 @@ button {
   font-size: 13px;
   color: var(--muted);
 }
+.goal-progress {
+  margin-top: 14px;
+}
 
+.goal-progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.goal-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #ecece7;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.goal-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width 250ms ease;
+}
 @media (max-width: 850px) {
   .progress-grid {
     grid-template-columns: 1fr;
