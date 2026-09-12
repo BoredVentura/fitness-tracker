@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
 const totalWorkoutCount = document.getElementById("totalWorkoutCount");
 const totalTrainingTime = document.getElementById("totalTrainingTime");
 const longestWorkout = document.getElementById("longestWorkout");
-  
+const progressModal = document.getElementById("progressModal");
+const closeProgressModal = document.getElementById("closeProgressModal");
+const progressForm = document.getElementById("progressForm");
+const progressGoalId = document.getElementById("progressGoalId");
+const progressValue = document.getElementById("progressValue");  
   let workouts =
     JSON.parse(localStorage.getItem("fitnessWorkouts")) || [];
 
@@ -353,12 +357,23 @@ const longestWorkout = document.getElementById("longestWorkout");
 
         </div>
 
-        <button
-          class="delete-goal"
-          data-id="${goal.id}"
-        >
-          Delete
-        </button>
+        <div class="goal-actions">
+
+  <button
+    class="update-goal"
+    data-id="${goal.id}"
+  >
+    Update
+  </button>
+
+  <button
+    class="delete-goal"
+    data-id="${goal.id}"
+  >
+    Delete
+  </button>
+
+</div>
 
       </div>
     `;
@@ -501,6 +516,19 @@ const longestWorkout = document.getElementById("longestWorkout");
     });
   }
 
+  if (closeProgressModal) {
+  closeProgressModal.addEventListener("click", function () {
+    progressModal.classList.remove("is-open");
+  });
+}
+
+if (progressModal) {
+  progressModal.addEventListener("click", function (event) {
+    if (event.target === progressModal) {
+      progressModal.classList.remove("is-open");
+    }
+  });
+}
 
   if (goalForm) {
 
@@ -529,6 +557,30 @@ unit:
 
       };
 
+if (progressForm) {
+  progressForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    const id = Number(progressGoalId.value);
+
+    const goal = goals.find(function (goal) {
+      return goal.id === id;
+    });
+
+    if (!goal) return;
+
+    goal.progress = progressValue.value;
+
+    saveGoals();
+    renderGoals();
+
+    progressForm.reset();
+    progressModal.classList.remove("is-open");
+
+  });
+}
+      
       goals.push(goal);
 
       saveGoals();
