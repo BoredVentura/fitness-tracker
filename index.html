@@ -8,32 +8,91 @@
 </head>
 <body>
 <main class="app-shell">
-  <section class="hero">
-    <p class="eyebrow">FITNESS TRACKER</p>
-    <h1>Build strength. Track progress.</h1>
-    <p class="hero-text">
-      Plan workouts, monitor goals and keep your fitness journey organised.
-    </p>
-  </section>
+<div class="app">
 
-  <section class="dashboard-grid">
-    <article class="dashboard-card">
-      <h2>Today's Workout</h2>
-      <p>No workout planned yet.</p>
-    </article>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">FITNESS TRACKER</p>
+      <h1>Build strength. Track progress.</h1>
+    </div>
 
-    <article class="dashboard-card">
-      <h2>Weekly Progress</h2>
-      <p>0 of 4 workouts completed.</p>
-    </article>
+    <button class="settings-button" id="settingsButton">
+      ⚙ Settings
+    </button>
+  </header>
 
-    <article class="dashboard-card">
-      <h2>Current Goal</h2>
-      <p>Add your first fitness goal.</p>
-    </article>
-  </section>
-</main>
+  <main>
 
-<script src="js/app.js"></script>  
+    <section class="summary-grid">
+
+      <article class="summary-card">
+        <span class="summary-label">Workouts this week</span>
+        <strong>0 / 4</strong>
+        <span class="summary-note">Your weekly target</span>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-label">Current streak</span>
+        <strong>0 days</strong>
+        <span class="summary-note">Keep showing up</span>
+      </article>
+
+      <article class="summary-card">
+        <span class="summary-label">Active goals</span>
+        <strong>0</strong>
+        <span class="summary-note">Set your first goal</span>
+      </article>
+
+    </section>
+
+
+    <section class="main-grid">
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-label">TODAY</p>
+            <h2>Today's Workout</h2>
+          </div>
+
+          <button class="primary-button">
+            + Add workout
+          </button>
+        </div>
+
+        <div class="empty-state">
+          <div class="empty-icon">🏋️</div>
+          <h3>No workout planned</h3>
+          <p>Add a workout to start building your routine.</p>
+        </div>
+      </article>
+
+
+      <article class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-label">GOALS</p>
+            <h2>Your Goals</h2>
+          </div>
+
+          <button class="text-button">
+            Add goal
+          </button>
+        </div>
+
+        <div class="empty-state small">
+          <div class="empty-icon">🎯</div>
+          <h3>No goals yet</h3>
+          <p>Create a fitness goal and track your progress.</p>
+        </div>
+      </article>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script src="js/app.js"></script>
 </body>
 </html>
