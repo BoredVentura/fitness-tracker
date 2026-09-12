@@ -174,6 +174,38 @@ const longestWorkout = document.getElementById("longestWorkout");
     }
   }
 
+  function updateProgressStats() {
+
+  if (totalWorkoutCount) {
+    totalWorkoutCount.textContent = workouts.length;
+  }
+
+  const totalMinutes = workouts.reduce(function (total, workout) {
+    return total + Number(workout.duration || 0);
+  }, 0);
+
+  if (totalTrainingTime) {
+    if (totalMinutes >= 60) {
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+
+      totalTrainingTime.textContent =
+        minutes > 0
+          ? `${hours}h ${minutes}m`
+          : `${hours}h`;
+    } else {
+      totalTrainingTime.textContent = `${totalMinutes} min`;
+    }
+  }
+
+  const longest = workouts.reduce(function (max, workout) {
+    return Math.max(max, Number(workout.duration || 0));
+  }, 0);
+
+  if (longestWorkout) {
+    longestWorkout.textContent = `${longest} min`;
+  }
+  }
 
   function renderWorkouts() {
 
@@ -250,7 +282,7 @@ const longestWorkout = document.getElementById("longestWorkout");
           saveWorkouts();
 
           renderWorkouts();
-
+          updateProgressStats();
         });
 
       });
@@ -334,7 +366,7 @@ const longestWorkout = document.getElementById("longestWorkout");
           saveGoals();
 
           renderGoals();
-
+          updateProgressStats();
         });
 
       });
@@ -497,7 +529,8 @@ const longestWorkout = document.getElementById("longestWorkout");
 
 
   renderWorkouts();
-  renderGoals();
-  updateSummary();
+renderGoals();
+updateSummary();
+updateProgressStats();
 
 });
