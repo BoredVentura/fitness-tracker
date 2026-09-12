@@ -76,9 +76,9 @@
             <h2>Your Goals</h2>
           </div>
 
-          <button class="text-button">
-            Add goal
-          </button>
+          <button class="text-button" id="addGoalButton">
+  Add goal
+</button>
         </div>
 
         <div class="empty-state small">
@@ -145,6 +145,65 @@
 
       <button type="submit" class="primary-button">
         Save workout
+      </button>
+
+    </form>
+
+  </div>
+  </div>
+
+  <div class="modal" id="goalModal">
+  <div class="modal-card">
+
+    <button class="modal-close" id="closeGoalModal">×</button>
+
+    <p class="panel-label">NEW GOAL</p>
+    <h2>Add a fitness goal</h2>
+
+    <form id="goalForm">
+
+      <label>
+        Goal name
+        <input
+          type="text"
+          id="goalName"
+          placeholder="e.g. Run 5K"
+          required
+        >
+      </label>
+
+      <label>
+        Target date
+        <input
+          type="date"
+          id="goalDate"
+          required
+        >
+      </label>
+
+      <label>
+        Target
+        <input
+          type="number"
+          id="goalTarget"
+          placeholder="e.g. 5"
+          min="1"
+          required
+        >
+      </label>
+
+      <label>
+        Unit
+        <input
+          type="text"
+          id="goalUnit"
+          placeholder="e.g. km, kg, workouts"
+          required
+        >
+      </label>
+
+      <button type="submit" class="primary-button">
+        Save goal
       </button>
 
     </form>
