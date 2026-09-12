@@ -2,6 +2,25 @@
   box-sizing: border-box;
 }
 
+:root {
+  --bg: #f6f5f1;
+  --card: #ffffff;
+  --text: #171b18;
+  --muted: #747b76;
+  --accent: #536f5e;
+  --border: #e3e3de;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
