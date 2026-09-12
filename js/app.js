@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const currentStreak = document.getElementById("currentStreak");
   const activeGoalCount = document.getElementById("activeGoalCount");
 
+const totalWorkoutCount = document.getElementById("totalWorkoutCount");
+const totalTrainingTime = document.getElementById("totalTrainingTime");
+const longestWorkout = document.getElementById("longestWorkout");
+  
   let workouts =
     JSON.parse(localStorage.getItem("fitnessWorkouts")) || [];
 
