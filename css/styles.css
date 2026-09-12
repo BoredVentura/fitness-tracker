@@ -17,28 +17,205 @@ body {
   background: var(--bg);
   color: var(--text);
 }
-* {
-  box-sizing: border-box;
+
+button,
+input,
+textarea {
+  font: inherit;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f6f5f1;
-  color: #1b1f1c;
+button {
+  cursor: pointer;
 }
 
-.app-shell {
-  max-width: 1200px;
+.app {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 80px 24px;
+  padding: 48px 24px 72px;
 }
 
-.hero {
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto 50px;
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 40px;
 }
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+.topbar h1 {
+  margin: 0;
+  max-width: 720px;
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.settings-button {
+  border: 1px solid var(--border);
+  background: var(--card);
+  padding: 12px 16px;
+  border-radius: 14px;
+  color: var(--text);
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.summary-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.summary-card strong {
+  display: block;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.summary-note {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 28px;
+  min-height: 360px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.panel-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.panel-label {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.panel h2,
+.modal-card h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.primary-button {
+  border: 0;
+  background: var(--accent);
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 14px;
+}
+
+.text-button {
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.empty-state {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.empty-state.small {
+  min-height: 230px;
+}
+
+.empty-icon {
+  font-size: 34px;
+  margin-bottom: 12px;
+}
+
+.empty-state h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.empty-state p {
+  margin: 0;
+  max-width: 320px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.workout-item,
+.goal-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.workout-item:last-child,
+.goal-item:last-child {
+  border-bottom: 0;
+}
+
+.workout-item h3,
+.goal-item h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.workout-item p,
+.goal-item p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.delete-workout,
+.delete-goal {
+  align-self: flex-start;
+  border: 0;
+  background: transparent;
+  color: #9a4e4e;
+  font-weight: 700;
+}
+
 .modal {
   position: fixed;
   inset: 0;
@@ -62,7 +239,7 @@ body {
   background: var(--card);
   border-radius: 24px;
   padding: 28px;
-  box-shadow: 0 24px 70px rgba(0,0,0,0.18);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
 }
 
 .modal-close {
@@ -77,8 +254,7 @@ body {
 }
 
 .modal-card h2 {
-  margin: 0 0 24px;
-  font-size: 30px;
+  margin-bottom: 24px;
 }
 
 .modal-card form {
@@ -99,7 +275,6 @@ body {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 13px 14px;
-  font: inherit;
   color: var(--text);
   background: #ffffff;
 }
@@ -107,129 +282,22 @@ body {
 .modal-card textarea {
   resize: vertical;
 }
-.eyebrow {
-  margin: 0 0 14px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  color: #5f7565;
-}
 
-.hero h1 {
-  margin: 0;
-  font-size: clamp(42px, 7vw, 72px);
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.hero-text {
-  margin: 22px auto 0;
-  max-width: 620px;
-  font-size: 18px;
-  line-height: 1.6;
-  color: #6d746f;
-}
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.dashboard-card {
-  min-height: 220px;
-  padding: 28px;
-  background: #ffffff;
-  border: 1px solid #e3e3de;
-  border-radius: 24px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
-}
-
-.dashboard-card h2 {
-  margin: 0 0 14px;
-  font-size: 24px;
-}
-
-.dashboard-card p {
-  margin: 0;
-  color: #737975;
-  line-height: 1.5;
-}
-
-@media (max-width: 800px) {
-  .app-shell {
-    padding: 50px 18px;
+@media (max-width: 850px) {
+  .topbar {
+    flex-direction: column;
   }
 
-  .dashboard-grid {
+  .summary-grid,
+  .main-grid {
     grid-template-columns: 1fr;
   }
-}
-.workout-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border);
-}
 
-.workout-item:last-child {
-  border-bottom: 0;
-}
+  .app {
+    padding: 32px 16px 56px;
+  }
 
-.workout-item h3 {
-  margin: 0 0 6px;
-  font-size: 18px;
-}
-
-.workout-item p {
-  margin: 4px 0 0;
-  color: var(--muted);
-  line-height: 1.45;
-}
-
-.delete-workout {
-  align-self: flex-start;
-  border: 0;
-  background: transparent;
-  color: #9a4e4e;
-  font-weight: 700;
-}
-
-.delete-workout:hover {
-  text-decoration: underline;
-}
-.goal-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.goal-item:last-child {
-  border-bottom: 0;
-}
-
-.goal-item h3 {
-  margin: 0 0 6px;
-  font-size: 18px;
-}
-
-.goal-item p {
-  margin: 4px 0 0;
-  color: var(--muted);
-  line-height: 1.45;
-}
-
-.delete-goal {
-  align-self: flex-start;
-  border: 0;
-  background: transparent;
-  color: #9a4e4e;
-  font-weight: 700;
-}
-
-.delete-goal:hover {
-  text-decoration: underline;
+  .panel {
+    min-height: 300px;
+  }
 }
