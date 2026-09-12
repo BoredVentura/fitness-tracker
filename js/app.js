@@ -5,7 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==============================
 
   const settingsButton = document.getElementById("settingsButton");
-
+const settingsModal = document.getElementById("settingsModal");
+const closeSettingsModal = document.getElementById("closeSettingsModal");
+const settingsForm = document.getElementById("settingsForm");
+const weeklyTargetInput = document.getElementById("weeklyTarget");
+const accentColorInput = document.getElementById("accentColor");
+const backgroundColorInput = document.getElementById("backgroundColor");
   const addWorkoutButton = document.getElementById("addWorkoutButton");
   const workoutModal = document.getElementById("workoutModal");
   const closeWorkoutModal = document.getElementById("closeWorkoutModal");
@@ -53,6 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let goals =
     JSON.parse(localStorage.getItem("fitnessGoals")) || [];
 
+  let trackerSettings =
+  JSON.parse(localStorage.getItem("fitnessSettings")) || {
+    weeklyTarget: 4,
+    accentColor: "#536f5e",
+    backgroundColor: "#f6f5f1"
+  };
 
   // ==============================
   // SAVE DATA
@@ -72,7 +83,24 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
+function saveSettings() {
+  localStorage.setItem(
+    "fitnessSettings",
+    JSON.stringify(trackerSettings)
+  );
+}
 
+  function applySettings() {
+  document.documentElement.style.setProperty(
+    "--accent",
+    trackerSettings.accentColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--bg",
+    trackerSettings.backgroundColor
+  );
+  }
   // ==============================
   // HELPERS
   // ==============================
@@ -206,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (weeklyWorkoutCount) {
       weeklyWorkoutCount.textContent =
-        `${getWeeklyWorkoutTotal()} / 4`;
+        `${getWeeklyWorkoutTotal()} / ${trackerSettings.weeklyTarget}`;
     }
 
     if (currentStreak) {
@@ -626,20 +654,58 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==============================
 
   if (settingsButton) {
+  settingsButton.addEventListener("click", function () {
 
-    settingsButton.addEventListener(
-      "click",
-      function () {
+    weeklyTargetInput.value =
+      trackerSettings.weeklyTarget;
 
-        alert(
-          "Settings panel is working."
-        );
+    accentColorInput.value =
+      trackerSettings.accentColor;
 
-      }
-    );
+    backgroundColorInput.value =
+      trackerSettings.backgroundColor;
+
+    settingsModal.classList.add("is-open");
+
+  });
+}
+
+  if (closeSettingsModal) {
+  closeSettingsModal.addEventListener("click", function () {
+    settingsModal.classList.remove("is-open");
+  });
+}
+
+if (settingsModal) {
+  settingsModal.addEventListener("click", function (event) {
+    if (event.target === settingsModal) {
+      settingsModal.classList.remove("is-open");
+    }
+  });
+}
+
+  if (settingsForm) {
+  settingsForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+    trackerSettings.weeklyTarget =
+      Number(weeklyTargetInput.value);
+
+    trackerSettings.accentColor =
+      accentColorInput.value;
+
+    trackerSettings.backgroundColor =
+      backgroundColorInput.value;
+
+    saveSettings();
+    applySettings();
+    updateSummary();
+
+    settingsModal.classList.remove("is-open");
+
+  });
   }
-
-
   // ==============================
   // WORKOUT MODAL
   // ==============================
@@ -936,7 +1002,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==============================
   // INITIAL LOAD
   // ==============================
-
+  applySettings();
   renderWorkouts();
   renderGoals();
   updateSummary();
