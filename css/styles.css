@@ -301,3 +301,53 @@ button {
     min-height: 300px;
   }
 }
+.progress-section {
+  margin-top: 24px;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.progress-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.progress-card-label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.progress-card strong {
+  display: block;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.progress-card-note {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 850px) {
+  .progress-grid {
+    grid-template-columns: 1fr;
+  }
+}
