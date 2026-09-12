@@ -180,3 +180,37 @@ body {
 .delete-workout:hover {
   text-decoration: underline;
 }
+.goal-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.goal-item:last-child {
+  border-bottom: 0;
+}
+
+.goal-item h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.goal-item p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.delete-goal {
+  align-self: flex-start;
+  border: 0;
+  background: transparent;
+  color: #9a4e4e;
+  font-weight: 700;
+}
+
+.delete-goal:hover {
+  text-decoration: underline;
+}
