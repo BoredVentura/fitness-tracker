@@ -1,19 +1,36 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   const settingsButton = document.getElementById("settingsButton");
+
   const addWorkoutButton = document.getElementById("addWorkoutButton");
   const workoutModal = document.getElementById("workoutModal");
   const closeWorkoutModal = document.getElementById("closeWorkoutModal");
   const workoutForm = document.getElementById("workoutForm");
   const workoutList = document.getElementById("workoutList");
 
+  const addGoalButton = document.getElementById("addGoalButton");
+  const goalModal = document.getElementById("goalModal");
+  const closeGoalModal = document.getElementById("closeGoalModal");
+  const goalForm = document.getElementById("goalForm");
+  const goalList = document.getElementById("goalList");
+
   let workouts =
     JSON.parse(localStorage.getItem("fitnessWorkouts")) || [];
+
+  let goals =
+    JSON.parse(localStorage.getItem("fitnessGoals")) || [];
 
   function saveWorkouts() {
     localStorage.setItem(
       "fitnessWorkouts",
       JSON.stringify(workouts)
+    );
+  }
+
+  function saveGoals() {
+    localStorage.setItem(
+      "fitnessGoals",
+      JSON.stringify(goals)
     );
   }
 
@@ -83,6 +100,68 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  function renderGoals() {
+
+    if (!goalList) return;
+
+    if (goals.length === 0) {
+      goalList.innerHTML = `
+        <div class="empty-state small">
+          <div class="empty-icon">🎯</div>
+          <h3>No goals yet</h3>
+          <p>Create a fitness goal and track your progress.</p>
+        </div>
+      `;
+      return;
+    }
+
+    goalList.innerHTML = goals.map(function (goal) {
+      return `
+        <div class="goal-item">
+
+          <div>
+            <h3>${goal.name}</h3>
+
+            <p>
+              Target: ${goal.target} ${goal.unit}
+            </p>
+
+            <p>
+              Due: ${goal.date}
+            </p>
+          </div>
+
+          <button
+            class="delete-goal"
+            data-id="${goal.id}"
+          >
+            Delete
+          </button>
+
+        </div>
+      `;
+    }).join("");
+
+    document
+      .querySelectorAll(".delete-goal")
+      .forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+          const id = Number(this.dataset.id);
+
+          goals = goals.filter(function (goal) {
+            return goal.id !== id;
+          });
+
+          saveGoals();
+          renderGoals();
+
+        });
+
+      });
+  }
+
   if (settingsButton) {
     settingsButton.addEventListener("click", function () {
       alert("Settings panel is working.");
@@ -133,60 +212,51 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  renderWorkouts();
-
-});      </button>
-    </div>
-  `).join("");
-
-  document.querySelectorAll(".delete-workout").forEach((button) => {
-    button.addEventListener("click", function () {
-      const id = Number(this.dataset.id);
-
-      workouts = workouts.filter((workout) => workout.id !== id);
-
-      saveWorkouts();
-      renderWorkouts();
+  if (addGoalButton) {
+    addGoalButton.addEventListener("click", function () {
+      goalModal.classList.add("is-open");
     });
-  });
-}
-
-settingsButton.addEventListener("click", function () {
-  alert("Settings panel is working.");
-});
-
-addWorkoutButton.addEventListener("click", function () {
-  workoutModal.classList.add("is-open");
-});
-
-closeWorkoutModal.addEventListener("click", function () {
-  workoutModal.classList.remove("is-open");
-});
-
-workoutModal.addEventListener("click", function (event) {
-  if (event.target === workoutModal) {
-    workoutModal.classList.remove("is-open");
   }
-});
 
-workoutForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+  if (closeGoalModal) {
+    closeGoalModal.addEventListener("click", function () {
+      goalModal.classList.remove("is-open");
+    });
+  }
 
-  const workout = {
-    id: Date.now(),
-    name: document.getElementById("workoutName").value,
-    date: document.getElementById("workoutDate").value,
-    duration: document.getElementById("workoutDuration").value,
-    notes: document.getElementById("workoutNotes").value
-  };
+  if (goalModal) {
+    goalModal.addEventListener("click", function (event) {
+      if (event.target === goalModal) {
+        goalModal.classList.remove("is-open");
+      }
+    });
+  }
 
-  workouts.push(workout);
+  if (goalForm) {
+    goalForm.addEventListener("submit", function (event) {
 
-  saveWorkouts();
+      event.preventDefault();
+
+      const goal = {
+        id: Date.now(),
+        name: document.getElementById("goalName").value,
+        date: document.getElementById("goalDate").value,
+        target: document.getElementById("goalTarget").value,
+        unit: document.getElementById("goalUnit").value
+      };
+
+      goals.push(goal);
+
+      saveGoals();
+      renderGoals();
+
+      goalForm.reset();
+      goalModal.classList.remove("is-open");
+
+    });
+  }
+
   renderWorkouts();
+  renderGoals();
 
-  workoutForm.reset();
-  workoutModal.classList.remove("is-open");
 });
-
-renderWorkouts();
