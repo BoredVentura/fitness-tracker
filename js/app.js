@@ -294,105 +294,97 @@ const longestWorkout = document.getElementById("longestWorkout");
 
   function renderGoals() {
 
-    if (!goalList) return;
+  if (!goalList) return;
 
-    if (goals.length === 0) {
+  if (goals.length === 0) {
 
-      goalList.innerHTML = `
-        <div class="empty-state small">
-          <div class="empty-icon">🎯</div>
-          <h3>No goals yet</h3>
-          <p>Create a fitness goal and track your progress.</p>
-        </div>
-      `;
+    goalList.innerHTML = `
+      <div class="empty-state small">
+        <div class="empty-icon">🎯</div>
+        <h3>No goals yet</h3>
+        <p>Create a fitness goal and track your progress.</p>
+      </div>
+    `;
 
-      updateSummary();
+    updateSummary();
+    return;
+  }
 
-      return;
-    }
+  goalList.innerHTML = goals.map(function (goal) {
 
+    const target = Number(goal.target) || 0;
+    const progress = Number(goal.progress) || 0;
 
-    goalList.innerHTML = goals.map(function (goal) {
-const target = Number(goal.target) || 0;
-const progress = Number(goal.progress) || 0;
+    const percentage =
+      target > 0
+        ? Math.min(100, Math.round((progress / target) * 100))
+        : 0;
 
-const percentage =
-  target > 0
-    ? Math.min(100, Math.round((progress / target) * 100))
-    : 0;
-      return `
-        <div class="goal-item">
+    return `
+      <div class="goal-item">
 
-          <div>
+        <div>
 
-            <h3>${goal.name}</h3>
+          <h3>${goal.name}</h3>
 
-            <p>
-              Target:
-              ${goal.target}
-              ${goal.unit}
-            </p>
+          <p>
+            Target: ${target} ${goal.unit}
+          </p>
 
-<div class="goal-progress">
-  <div class="goal-progress-info">
-    <span>${progress} / ${target} ${goal.unit}</span>
-    <span>${percentage}%</span>
-  </div>
+          <div class="goal-progress">
 
-  <div class="goal-progress-bar">
-    <div
-      class="goal-progress-fill"
-      style="width: ${percentage}%"
-    ></div>
-  </div>
-</div>
+            <div class="goal-progress-info">
+              <span>${progress} / ${target} ${goal.unit}</span>
+              <span>${percentage}%</span>
+            </div>
 
-            <p>
-              Due:
-              ${goal.date}
-            </p>
+            <div class="goal-progress-bar">
+              <div
+                class="goal-progress-fill"
+                style="width: ${percentage}%"
+              ></div>
+            </div>
 
           </div>
 
-          <button
-            class="delete-goal"
-            data-id="${goal.id}"
-          >
-            Delete
-          </button>
+          <p>
+            Due: ${goal.date}
+          </p>
 
         </div>
-      `;
 
-    }).join("");
+        <button
+          class="delete-goal"
+          data-id="${goal.id}"
+        >
+          Delete
+        </button>
 
+      </div>
+    `;
 
-    document
-      .querySelectorAll(".delete-goal")
-      .forEach(function (button) {
+  }).join("");
 
-        button.addEventListener("click", function () {
+  document
+    .querySelectorAll(".delete-goal")
+    .forEach(function (button) {
 
-          const id =
-            Number(this.dataset.id);
+      button.addEventListener("click", function () {
 
-          goals =
-            goals.filter(function (goal) {
+        const id = Number(this.dataset.id);
 
-              return goal.id !== id;
-
-            });
-
-          saveGoals();
-
-          renderGoals();
-          updateProgressStats();
+        goals = goals.filter(function (goal) {
+          return goal.id !== id;
         });
+
+        saveGoals();
+        renderGoals();
 
       });
 
+    });
 
-    updateSummary();
+  updateSummary();
   }
 
 
